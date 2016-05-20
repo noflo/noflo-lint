@@ -13,3 +13,10 @@ exports.main = main = ->
 
   program.recursive = true
   program.baseDir = program.args[0]
+  program.runtimes = ['noflo']
+
+  manifest.dependencies.loadAndFind program.args[0], program.args[1], program, (err, deps) ->
+    if err
+      console.error err
+      process.exit 1
+    console.log JSON.stringify deps, null, 2
