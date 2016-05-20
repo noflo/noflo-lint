@@ -1,0 +1,34 @@
+{
+  "name": "noflo-lint",
+  "version": "0.1.0",
+  "description": "NoFlo project linter",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/noflo/noflo-lint.git"
+  },
+  "keywords": [
+    "noflo",
+    "lint"
+  ],
+  "author": "Henri Bergius <henri.bergius@iki.fi>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/noflo/noflo-lint/issues"
+  },
+  "homepage": "https://github.com/noflo/noflo-lint#readme",
+  "dependencies": {
+    "fbp-manifest": "^0.1.4",
+    "noflo": "^0.7.5"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "grunt": "^1.0.1",
+    "grunt-coffeelint": "0.0.15",
+    "grunt-mocha-test": "^0.12.7",
+    "mocha": "^2.4.5"
+  }
+}
