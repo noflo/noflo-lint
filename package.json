@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/noflo/noflo-lint#readme",
   "dependencies": {
+    "bluebird": "^3.4.0",
+    "commander": "^2.9.0",
     "fbp-manifest": "^0.1.4",
     "noflo": "^0.7.5"
   },
