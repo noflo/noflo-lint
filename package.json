@@ -19,9 +19,13 @@
   "bugs": {
     "url": "https://github.com/noflo/noflo-lint/issues"
   },
+  "bin": {
+    "noflo-lint": "./bin/noflo-lint"
+  },
   "homepage": "https://github.com/noflo/noflo-lint#readme",
   "dependencies": {
     "bluebird": "^3.4.0",
+    "coffee-script": "^1.10.0",
     "commander": "^2.9.0",
     "fbp-manifest": "^0.1.4",
     "noflo": "^0.7.5"
