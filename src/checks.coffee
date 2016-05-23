@@ -19,3 +19,20 @@ exports.portDescriptions = (instance, callback) ->
   if missing.length
     return callback new Error "Missing port descriptions: #{missing.join(', ')}"
   callback null
+
+exports.wirePattern = (instance, callback) ->
+  unless typeof instance.groupedData is 'object'
+    return callback new Error "Not using WirePattern"
+  callback null
+
+exports.processApi = (instance, callback) ->
+  unless typeof instance.handle is 'function'
+    return callback new Error "Not using Process API"
+  callback null
+
+exports.legacyApi = (instance, callback) ->
+  exports.processApi instance, (err) ->
+    return callback null unless err
+    exports.wirePattern instance, (err) ->
+      return callback null unless err
+      callback new Error "Using legacy API"
