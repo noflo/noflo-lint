@@ -27,4 +27,4 @@ Currently the following checks are available:
 
 ## Contributing
 
-Additional checks can be added to the `src/check.coffee` file. Each "checker" receives a component instance to inspect.
+Additional checks can be added to the `src/check.coffee` file. Each "checker" receives a component instance to inspect. Another interesting area would be to inspect the connections in the graph. For example, detecting if there are unconnected required ports.
