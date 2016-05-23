@@ -30,6 +30,11 @@ exports.processApi = (instance, callback) ->
     return callback new Error "Not using Process API"
   callback null
 
+exports.asyncComponent = (instance, callback) ->
+  if typeof instance.doAsync is 'function'
+    return callback new Error "Using AsyncComponent API"
+  callback null
+
 exports.legacyApi = (instance, callback) ->
   exports.processApi instance, (err) ->
     return callback null unless err
