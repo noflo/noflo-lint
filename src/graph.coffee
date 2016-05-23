@@ -20,9 +20,9 @@ exports.findDependencies = (baseDir, graph, options, callback) ->
     components = []
     graphs = []
     for module in deps
-      for component in module.components
-        collection = if component.elementary then components else graphs
-        collection.push "#{module.name}/#{component.name}"
+      for comp in module.components
+        collection = if comp.elementary then components else graphs
+        collection.push "#{module.name}/#{comp.name}"
     callback null, components
 
 exports.lint = (baseDir, graph, options, callback) ->
@@ -32,8 +32,6 @@ exports.lint = (baseDir, graph, options, callback) ->
   .then (deps) ->
     Promise.map deps, (dep) ->
       lintComponent dep, options
-    ,
-      concurrency: 1
   .nodeify callback
 
 exports.analyze = (lintResults, rules, callback) ->
@@ -41,10 +39,10 @@ exports.analyze = (lintResults, rules, callback) ->
     components: []
     errors: 0
     warnings: 0
-  for component in lintResults
+  for comp in lintResults
     result =
-      name: component.name
-    for rule, failure of component.failed
+      name: comp.name
+    for rule, failure of comp.failed
       continue if rules[rule] is 'ignore'
       if rules[rule] is 'warn'
         result.warn = [] unless result.warn
@@ -83,18 +81,18 @@ exports.main = main = ->
 
       console.log "#{program.args[1]} dependencies:"
 
-      for component in results.components
+      for comp in results.components
         color = colors.green
-        if component.warn?.length
+        if comp.warn?.length
           color = colors.yellow
-        if component.error?.length
+        if comp.error?.length
           color = colors.red
-        console.log ' ' + color component.name
-        if component.error?.length
-          for error in component.error
+        console.log ' ' + color comp.name
+        if comp.error?.length
+          for error in comp.error
             console.log ' - ' + colors.red error
-        if component.warn?.length
-          for warning in component.warn
+        if comp.warn?.length
+          for warning in comp.warn
             console.log ' - ' + colors.yellow warning
 
       console.log " #{results.errors} errors, #{results.warnings} warnings"
