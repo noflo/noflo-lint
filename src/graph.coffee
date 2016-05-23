@@ -11,11 +11,11 @@ defaults =
   asynccomponent: 'error'
   legacy_api: 'error'
 
-exports.findDependencies = (baseDir, graph, options, callback) ->
-  options.runtimes = ['noflo']
+exports.findDependencies = (baseDir, graph, options, modules, callback) ->
+  options.runtimes = ['noflo'] unless options.runtimes
   options.recursive = true
-  options.baseDir = baseDir
-  manifest.dependencies.loadAndFind baseDir, graph, options, (err, deps) ->
+  options.baseDir = baseDir unless options.baseDir
+  manifest.dependencies.find modules, graph, options, (err, deps) ->
     return callback err if err
     components = []
     graphs = []
@@ -25,10 +25,21 @@ exports.findDependencies = (baseDir, graph, options, callback) ->
         collection.push "#{module.name}/#{comp.name}"
     callback null, components
 
-exports.lint = (baseDir, graph, options, callback) ->
+exports.loadAndLint = (baseDir, graph, options, callback) ->
+  options.runtimes = ['noflo']
+  options.recursive = true
+  options.baseDir = baseDir
+  loader = Promise.promisify manifest.load.load
+  linter = Promise.promisify exports.lint
+  loader baseDir, options
+  .then (manifest) ->
+    linter baseDir, graph, options, manifest.modules
+  .nodeify callback
+
+exports.lint = (baseDir, graph, options, modules, callback) ->
   finder = Promise.promisify exports.findDependencies
   lintComponent = Promise.promisify component.lint
-  finder baseDir, graph, options
+  finder baseDir, graph, options, modules
   .then (deps) ->
     Promise.map deps, (dep) ->
       lintComponent dep, options
@@ -66,7 +77,7 @@ exports.main = main = ->
   if program.args.length < 2
     program.args.unshift process.cwd()
 
-  exports.lint program.args[0], program.args[1], program, (err, deps) ->
+  exports.loadAndLint program.args[0], program.args[1], program, (err, deps) ->
     if err
       console.error err
       process.exit 1
