@@ -1,10 +1,10 @@
 exports.description = (instance, callback) ->
-  unless instance.description
+  unless instance.getDescription()
     return callback new Error "Missing description"
   callback null
 
 exports.icon = (instance, callback) ->
-  unless instance.icon
+  unless instance.getIcon()
     return callback new Error "Missing icon"
   callback null
 
