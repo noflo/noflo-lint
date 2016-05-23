@@ -32,6 +32,8 @@ exports.lint = (baseDir, graph, options, callback) ->
   .then (deps) ->
     Promise.map deps, (dep) ->
       lintComponent dep, options
+    ,
+      concurrency: 1
   .nodeify callback
 
 exports.analyze = (lintResults, rules, callback) ->
