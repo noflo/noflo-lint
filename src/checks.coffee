@@ -21,9 +21,11 @@ exports.port_descriptions = (instance, callback) ->
   callback null
 
 exports.wirepattern = (instance, callback) ->
-  unless typeof instance.groupedData is 'object'
-    return callback new Error "Not using WirePattern"
-  callback null
+  exports.process_api instance, (err) ->
+    return callback null unless err
+    unless typeof instance.groupedData is 'object'
+      return callback new Error "Not using WirePattern"
+    callback null
 
 exports.process_api = (instance, callback) ->
   unless typeof instance.handle is 'function'
@@ -36,8 +38,8 @@ exports.asynccomponent = (instance, callback) ->
   callback null
 
 exports.legacy_api = (instance, callback) ->
-  exports.processApi instance, (err) ->
+  exports.process_api instance, (err) ->
     return callback null unless err
-    exports.wirePattern instance, (err) ->
+    exports.wirepattern instance, (err) ->
       return callback null unless err
       callback new Error "Using legacy API"
