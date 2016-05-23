@@ -1,3 +1,11 @@
 language: node_js
 node_js:
 - 4.2
+deploy:
+  provider: npm
+  email: henri.bergius@iki.fi
+  api_key:
+    secure: vKYMzJcNEfJ80/YAE8HjYTpkf1etThg8Pmwa0OY9OBTFOtlDdlVdX4Hrox8Ji38raku8RJJ48keiULnhmkbBYa9xpfrAuxK2M53YLtuGy9NSZw75D4mGTxOKRnwjEjYaAYUtFNVvmuHCjGz/0ZKjiQeNLVhzVPAmL+DyOiZKntc2VdsOety+HOQjXVGPxYZKMc6JZSEbp8FMZ34BhNHJE+lD56MogxlGEQrpv1EamDthcqOLZhdBTLGtH+QtKBCuUkFdq4xccgvBKJQIt522yqYZfD374FGolw78h/CenMuW6xF5Mmecz5KOW0kDSaZin/m0+bw5CwMukIv1YvhTrXbh9iVXXcmzp7xbAdnaXil0zWCiqIlW3m813kcf2OLHQH07OpgIj8zqiqzEnfjNNQWTq8qMykbrOtRJMPgKUmvSXFsnKywojSFXOR3c++sfAyLFXVzJ9iTOExblWlHEJ5Lay/SMVj0AYsW7mjmrwGiyJ5JfyIbj2yfGkORTjMPt7rr2lNLi+adrN/aEx0CIG9VTioeBy1qH3+kMTuRGe2rkWTElX434/4ut+NCapvJMZp1+97CAp/QF0aV9DhQYdWmz+UJyhxbKz79FCOgaAIpSN3A8ed3hqHCe2gSc/wPcsXzw8kM00/+FqF8WtegUVXvKUY3djNoPQncPgWOpVNo=
+  on:
+    tags: true
+    repo: noflo/noflo-lint
