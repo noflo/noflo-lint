@@ -8,7 +8,7 @@ exports.icon = (instance, callback) ->
     return callback new Error "Missing icon"
   callback null
 
-exports.portDescriptions = (instance, callback) ->
+exports.port_descriptions = (instance, callback) ->
   missing = []
   for name, def of instance.inPorts.ports
     continue if def.getDescription()
@@ -20,22 +20,22 @@ exports.portDescriptions = (instance, callback) ->
     return callback new Error "Missing port descriptions: #{missing.join(', ')}"
   callback null
 
-exports.wirePattern = (instance, callback) ->
+exports.wirepattern = (instance, callback) ->
   unless typeof instance.groupedData is 'object'
     return callback new Error "Not using WirePattern"
   callback null
 
-exports.processApi = (instance, callback) ->
+exports.process_api = (instance, callback) ->
   unless typeof instance.handle is 'function'
     return callback new Error "Not using Process API"
   callback null
 
-exports.asyncComponent = (instance, callback) ->
+exports.asynccomponent = (instance, callback) ->
   if typeof instance.doAsync is 'function'
     return callback new Error "Using AsyncComponent API"
   callback null
 
-exports.legacyApi = (instance, callback) ->
+exports.legacy_api = (instance, callback) ->
   exports.processApi instance, (err) ->
     return callback null unless err
     exports.wirePattern instance, (err) ->
