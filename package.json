@@ -28,7 +28,7 @@
     "coffee-script": "^1.10.0",
     "colors-cli": "^1.0.4",
     "commander": "^2.9.0",
-    "fbp-manifest": "^0.1.4",
+    "fbp-manifest": "^0.1.13",
     "noflo": "^0.7.5"
   },
   "devDependencies": {
