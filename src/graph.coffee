@@ -79,7 +79,7 @@ exports.main = main = ->
 
   exports.loadAndLint program.args[0], program.args[1], program, (err, deps) ->
     if err
-      console.error err
+      console.error err.message
       process.exit 1
     if program.json
       console.log JSON.stringify deps, null, 2
@@ -87,7 +87,7 @@ exports.main = main = ->
     colors = require 'colors-cli'
     exports.analyze deps, defaults, (err, results) ->
       if err
-        console.error err
+        console.error err.message
         process exit 1
 
       console.log "#{program.args[1]} dependencies:"
