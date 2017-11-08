@@ -29,7 +29,7 @@
     "colors-cli": "^1.0.4",
     "commander": "^2.9.0",
     "fbp-manifest": "^0.2.0",
-    "noflo": "^0.8.0"
+    "noflo": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^4.0.0",
